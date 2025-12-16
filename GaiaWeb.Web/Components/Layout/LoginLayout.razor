@@ -1,0 +1,36 @@
+﻿@inherits LayoutComponentBase
+
+<div class="login-page-container">
+    <header class="login-header">
+        <h1>Autenticação</h1>
+    </header>
+
+    <main class="login-content">
+        @Body  @* <-- Aqui o Blazor insere o conteúdo da página de Login *@
+    </main>
+
+    <footer class="login-footer">
+        &copy; Minha Aplicação
+    </footer>
+</div>
+
+<style>
+    /* Adicione seus estilos CSS para o layout de login aqui */
+    .login-page-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        background-color: #f0f0f0; /* Fundo diferente */
+    }
+
+    .login-content {
+        padding: 40px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        width: 100%;
+        max-width: 400px;
+    }
+</style>

@@ -5,8 +5,6 @@
 
 <h1>Histórico de Ocorrência</h1>
 
-<OccurrenceGrid Occurrences="@occurrences" />
-
 <div class="card mb-4 mt-4">
     <div class="card-body">
         <EditForm Model="@searchModel" OnValidSubmit="HandleSearch" FormName="searchForm">
@@ -40,6 +38,7 @@
                 </div>
             </div>
         </EditForm>
+        <OccurrenceGrid Occurrences="@occurrences" />
     </div>
 </div>
 

@@ -1,0 +1,44 @@
+@namespace GaiaWeb.Web.Components.Controls
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Motivo</th>
+                <th>Data Início</th>
+                <th>Data Fim</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Occurrences != null)
+            {
+                @foreach (var item in Occurrences)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Motivo</td>
+                        <td>@item.DataInicio?.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td>@item.DataFim?.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td>@item.Status</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+@code {
+    [Parameter]
+    public List<OccurrenceItem> Occurrences { get; set; } = new();
+
+    public class OccurrenceItem
+    {
+        public string Id { get; set; } = string.Empty;
+        public string Motivo { get; set; } = string.Empty;
+        public DateTime? DataInicio { get; set; }
+        public DateTime? DataFim { get; set; }
+        public string Status { get; set; } = string.Empty;
+    }
+}

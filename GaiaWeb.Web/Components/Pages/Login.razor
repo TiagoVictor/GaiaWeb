@@ -1,23 +1,41 @@
 ﻿@page "/"
 @using GaiaWeb.Web.Components.Layout
 @layout LoginLayout
-<h3>Login</h3>
+@inject NavigationManager NavigationManager
 
 <div class="container">
     <h4>Login</h4>
 
-    <form>
-        <label>Email</label>
-        <input type="email" class="form-control" required/>
+    <EditForm Model="@login" OnValidSubmit="ToLogin" FormName="login">
+        <DataAnnotationsValidator />
 
-        <label>Senha</label>
-        <input type="password" class="form-control" required />
+        <div class="mb-3">
+            <label>Email</label>
+            <InputText class="form-control"
+                       @bind-Value="login.Email" />
+        </div>
 
-        <input type="submit" class="btn btn-primary mt-3" value="Login" />
-    </form>
+        <div class="mb-3">
+            <label>Senha</label>
+            <InputText type="password"
+                       class="form-control"
+                       @bind-Value="login.Senha" />
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">
+            Teste
+        </button>
+    </EditForm>
 </div>
 
 
 @code {
-
+    class LoginModel{
+        public string Email {get; set;}
+        public string Senha {get; set;}
+    }
+    private LoginModel login = new();
+    private async Task ToLogin(){
+        NavigationManager.NavigateTo("/home");
+    }
 }

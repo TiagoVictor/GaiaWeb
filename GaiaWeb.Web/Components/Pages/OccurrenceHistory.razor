@@ -1,0 +1,72 @@
+@page "/occurrence-history"
+@using GaiaWeb.Web.Components.Controls
+
+<PageTitle>Histórico de Ocorrência</PageTitle>
+
+<h1>Histórico de Ocorrência</h1>
+
+<OccurrenceGrid Occurrences="@occurrences" />
+
+<div class="card mb-4 mt-4">
+    <div class="card-body">
+        <EditForm Model="@searchModel" OnValidSubmit="HandleSearch" FormName="searchForm">
+            <div class="row">
+                <div class="col-md-2 mb-3">
+                    <label class="form-label">Número</label>
+                    <InputText @bind-Value="searchModel.Id" class="form-control" placeholder="Número" oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
+                </div>
+                <div class="col-md-2 mb-3">
+                    <label class="form-label">Status</label>
+                    <InputSelect @bind-Value="searchModel.Status" class="form-select">
+                        <option value="">Todos</option>
+                        <option value="aguardando">Aguardando</option>
+                        <option value="iniciada">Iniciada</option>
+                        <option value="apoio">Apoio</option>
+                        <option value="finalizada">Finalizada</option>
+                    </InputSelect>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label class="form-label">Data Inicial</label>
+                    <InputDate @bind-Value="searchModel.StartDate" Type="InputDateType.Date" class="form-control" />
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label class="form-label">Data Final</label>
+                    <InputDate @bind-Value="searchModel.EndDate" Type="InputDateType.Date" class="form-control" />
+                </div>
+                <div class="col-md-2 mb-3 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="bi bi-search"></i> Pesquisar
+                    </button>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private SearchModel searchModel = new();
+    private List<OccurrenceGrid.OccurrenceItem> occurrences = new();
+
+    protected override void OnInitialized()
+    {
+        // Dummy data for demonstration
+        occurrences.Add(new OccurrenceGrid.OccurrenceItem { Id = "101", Motivo = "Queda de árvore", DataInicio = DateTime.Now.AddDays(-2), DataFim = DateTime.Now.AddDays(-2).AddHours(2), Status = "Finalizada" });
+        occurrences.Add(new OccurrenceGrid.OccurrenceItem { Id = "102", Motivo = "Buraco na via", DataInicio = DateTime.Now.AddDays(-1), Status = "Aguardando" });
+        occurrences.Add(new OccurrenceGrid.OccurrenceItem { Id = "103", Motivo = "Iluminação pública", DataInicio = DateTime.Now, Status = "Iniciada" });
+    }
+
+    private void HandleSearch()
+    {
+        // Search logic to be implemented
+        Console.WriteLine($"Search: Id={searchModel.Id}, Status={searchModel.Status}, Start={searchModel.StartDate}, End={searchModel.EndDate}");
+    }
+
+    public class SearchModel
+    {
+        public string? Id { get; set; }
+        public string? Status { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+    }
+}
+
